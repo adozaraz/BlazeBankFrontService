@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: front_site
-          image: localhost:5000/front_site_image
+          image: front_site_image
           imagePullPolicy: IfNotPresent
           resources:
             limits:
