@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front_site_deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front_site
+  template:
+    metadata:
+      labels:
+        app: front_site
+    spec:
+      containers:
+        - name: front_site
+          image: localhost:5000/front_site_image
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 4000
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: front_site
+spec:
+  selector:
+    app: front_site
+  type: NodePort
+  ports:
+    - nodePort: 32000
+      port: 4000
+      targetPort: 4000
