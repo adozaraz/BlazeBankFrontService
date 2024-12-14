@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {MainPageComponent} from "./main-page/main-page.component";
-import {LoginComponent} from "./login/login.component";
+import {MainPageComponent} from "./components/main-page/main-page.component";
+import {LoginComponent} from "./components/login/login.component";
+import {AuthGuardService} from "./security/auth-guard.service";
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -10,6 +11,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuardService]
 })
 export class AppRoutingModule { }
