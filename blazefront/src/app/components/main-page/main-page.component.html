@@ -9,7 +9,64 @@
             И мечты сбываются в мнгновение молнии
         </p>
     </div>
-    <button class="button login_button" (click)="redirectToLogin()">
-        Войти
-    </button>
+    <table>
+      <tr>
+        <td>Номер карты</td>
+        <td>Баланс карты</td>
+      </tr>
+      <tr *ngFor="let card of cards">
+        <td>{{card.cardNumber}}</td>
+        <td>{{card.balance}}</td>
+      </tr>
+    </table>
+    <div [formGroup]="cardCreationForm">
+      <div>
+        <label for="cardNumber">Номер карты</label>
+        <input onlyNumber="True" id="cardNumber" formControlName="cardNumber"/>
+      </div>
+      <div>
+        <label for="accountNumber">Номер счёта</label>
+        <input type="number" id="accountNumber" formControlName="accountNumber"/>
+      </div>
+      <div>
+        <label for="cardType">Вид карты</label>
+        <input type="text" id="cardType" formControlName="cardType"/>
+      </div>
+      <div>
+        <label for="cvv">CVV</label>
+        <input type="number" id="cvv" formControlName="cvv"/>
+      </div>
+    </div>
+    <div>
+      <button (click)="createCard()">Выпустить карту</button>
+    </div>
+    <div [formGroup]="transferMoneyForm">
+      <div>
+        <label for="senderCardNumber">Номер карты, с которой будут отправляться деньги</label>
+        <input type="number" id="senderCardNumber" formControlName="senderCardNumber"/>
+      </div>
+      <div>
+        <label for="senderAccountNumber">Номер счёта, с которого будут отправляться деньги</label>
+        <input type="number" id="senderAccountNumber" formControlName="senderAccountNumber"/>
+      </div>
+      <div>
+        <label for="amount">Сколько отправить</label>
+        <input type="text" id="amount" formControlName="amount"/>
+      </div>
+      <div>
+        <label for="receiverCardNumber">Номер карты, на которую придут деньги</label>
+        <input type="number" id="receiverCardNumber" formControlName="receiverCardNumber"/>
+      </div>
+      <div>
+        <label for="receiverAccountNumber">Номер счёта, на который придут деньги</label>
+        <input type="number" id="receiverAccountNumber" formControlName="receiverAccountNumber"/>
+      </div>
+      <div>
+        <label for="cvvChecker">CVV</label>
+        <input type="number" id="cvvChecker" formControlName="cvv"/>
+      </div>
+    </div>
+    <div>
+      <button (click)="sendMoney()">Отправить деньги</button>
+    </div>
 </div>

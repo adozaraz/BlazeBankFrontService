@@ -1,34 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from "@angular/forms";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
-import { AuthGuardService } from "./security/auth-guard.service";
-import { AuthInterceptor } from "./security/auth-interceptor";
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    MainPageComponent
+    MainPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-      AuthGuardService,
-  ],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
