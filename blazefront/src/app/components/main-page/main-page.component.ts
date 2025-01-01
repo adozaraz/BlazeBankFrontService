@@ -32,6 +32,7 @@ export class MainPageComponent {
       amount: new FormControl(),
       receiverCardNumber: new FormControl(),
       receiverAccountNumber: new FormControl(),
+      receiverBank: new FormControl(),
       cvv: new FormControl(),
     });
   }
@@ -67,12 +68,17 @@ export class MainPageComponent {
       this.transferMoneyForm.get('amount')?.value,
       this.transferMoneyForm.get('receiverCardNumber')?.value,
       this.transferMoneyForm.get('receiverAccountNumber')?.value,
+      this.transferMoneyForm.get('receiverBank')?.value,
       this.transferMoneyForm.get('cvv')?.value,
     );
     this.requestService.completePayment(paymentInfo).subscribe((data: any) => {
       if (data.status == '200') {
         alert("Перевод прошёл успешно")
-      } else {
+      }
+      else if (data.status == '202') {
+        alert("Перевод в обработке в другом банке.")
+      }
+      else {
         alert("Произошла ошибка при переводе. Попробуйте перевести деньги позже");
         console.log(data.description);
       }
